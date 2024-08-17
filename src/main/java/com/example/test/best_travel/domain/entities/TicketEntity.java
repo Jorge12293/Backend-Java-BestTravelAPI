@@ -3,6 +3,7 @@ package com.example.test.best_travel.domain.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -22,8 +23,8 @@ import lombok.NoArgsConstructor;
 public class TicketEntity implements Serializable{
     @Id
     private UUID id;
-    private LocalDate departureDate;
-    private LocalDate arrivalDate;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
     private LocalDate purchaseDate;
     private BigDecimal price;
     @ManyToOne
