@@ -54,20 +54,29 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketResponse read(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+        TicketEntity ticketFromDb = ticketRepository.findById(id).orElseThrow();
+        return entityToResponse(ticketFromDb);
     }
 
     @Override
     public TicketResponse update(TicketRequest request, UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        TicketEntity ticketToUpdated = ticketRepository.findById(id).orElseThrow();
+        FlyEntity fly = flyRepository.findById(request.getIdFly()).orElseThrow();
+
+        ticketToUpdated.setFly(fly);
+        ticketToUpdated.setPrice(BigDecimal.valueOf(0.25));
+        ticketToUpdated.setDepartureDate(LocalDateTime.now());
+        ticketToUpdated.setArrivalDate(LocalDateTime.now());
+
+        TicketEntity ticketUpdated = ticketRepository.save(ticketToUpdated);
+        log.info("Ticket updated with id {}",ticketUpdated);
+        return entityToResponse(ticketUpdated);
     }
 
     @Override
     public void delete(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        TicketEntity ticketToDeleted = ticketRepository.findById(id).orElseThrow();
+        ticketRepository.delete(ticketToDeleted);
     }
     
     private TicketResponse entityToResponse(TicketEntity entity){

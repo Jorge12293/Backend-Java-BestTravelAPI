@@ -9,9 +9,18 @@ import com.example.test.best_travel.infraestructure.abstract_services.ITicketSer
 
 import lombok.AllArgsConstructor;
 
+import java.util.UUID;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
+
 
 
 @RestController
@@ -26,5 +35,19 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.create(request));
     }
     
+    @GetMapping(path = "{id}")
+    public ResponseEntity<TicketResponse> get(@PathVariable UUID id) {
+        return ResponseEntity.ok(ticketService.read(id));
+    }
+    
+    @PutMapping(path = "{id}")
+    public ResponseEntity<TicketResponse> put(@PathVariable UUID id, @RequestBody TicketRequest request) {
+        return ResponseEntity.ok(this.ticketService.update(request, id));
+    }
 
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        ticketService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
