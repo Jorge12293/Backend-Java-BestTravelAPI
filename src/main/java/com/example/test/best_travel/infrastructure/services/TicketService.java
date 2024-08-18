@@ -98,5 +98,5 @@ public class TicketService implements ITicketService {
         return ticketResponse;
     }
 
-    private static final BigDecimal charges_price_percentage = BigDecimal.valueOf(0.25);
+    public static final BigDecimal charges_price_percentage = BigDecimal.valueOf(0.25);
 }
