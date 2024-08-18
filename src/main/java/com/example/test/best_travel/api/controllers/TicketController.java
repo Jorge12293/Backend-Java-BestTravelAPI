@@ -1,14 +1,18 @@
 package com.example.test.best_travel.api.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.test.best_travel.api.models.request.TicketRequest;
 import com.example.test.best_travel.api.models.responses.TicketResponse;
-import com.example.test.best_travel.infraestructure.abstract_services.ITicketService;
+import com.example.test.best_travel.infrastructure.abstract_services.ITicketService;
 
 import lombok.AllArgsConstructor;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -49,5 +53,10 @@ public class TicketController {
     public ResponseEntity<Void> delete(@PathVariable UUID id){
         ticketService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String,BigDecimal>> getFlyPrice(@RequestParam Long flyId) {
+        return ResponseEntity.ok(Collections.singletonMap("flyPrice", ticketService.findPrice(flyId)));
     }
 }
