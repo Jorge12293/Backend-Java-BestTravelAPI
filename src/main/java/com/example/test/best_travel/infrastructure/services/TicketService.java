@@ -18,6 +18,7 @@ import com.example.test.best_travel.domain.repositories.CustomerRepository;
 import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.domain.repositories.TicketRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.ITicketService;
+import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
 import com.example.test.best_travel.util.BestTravelUtil;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class TicketService implements ITicketService {
     private final FlyRepository flyRepository;
     private final CustomerRepository customerRepository;
     private final TicketRepository ticketRepository;
+    private final CustomerHelper customerHelper;
     
     @Override
     public TicketResponse create(TicketRequest request) {
@@ -49,6 +51,10 @@ public class TicketService implements ITicketService {
         
         TicketEntity ticketPersisted = ticketRepository.save(ticketToPersist);
         log.info("Ticket saved with id: {}",ticketPersisted.getId());    
+        
+        // Increment Count
+        customerHelper.increase(customer.getDni(), TicketService.class);
+
         return entityToResponse(ticketPersisted);
     }
 

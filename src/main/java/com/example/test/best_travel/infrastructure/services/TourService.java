@@ -21,6 +21,7 @@ import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.domain.repositories.HotelRepository;
 import com.example.test.best_travel.domain.repositories.TourRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.ITourService;
+import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
 import com.example.test.best_travel.infrastructure.helpers.TourHelper;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class TourService implements ITourService {
     private final HotelRepository hotelRepository;
     private final CustomerRepository customerRepository;
     private final TourHelper tourHelper;
+    private final CustomerHelper customerHelper;
 
     @Override
     public TourResponse create(TourRequest request) {
@@ -58,6 +60,9 @@ public class TourService implements ITourService {
                 .build();
 
         TourEntity tourSaved = tourRepository.save(tourToSave);
+
+        // Increment Count
+        customerHelper.increase(customer.getDni(), TourService.class);
 
         return TourResponse.builder()
                 .reservationIds(
@@ -104,15 +109,22 @@ public class TourService implements ITourService {
 
 
     @Override
-    public UUID addReservation(Long reservationId, Long tourId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addReservation'");
+    public void removeReservation(Long tourId,UUID reservationId) {
+        TourEntity tourUpdate = tourRepository.findById(tourId).orElseThrow();
+        tourUpdate.removeReservation(reservationId);
+        tourRepository.save(tourUpdate);
     }
 
     @Override
-    public void removeReservation(Long tourId,UUID reservationId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeReservation'");
+    public UUID addReservation(Long hotelId, Long tourId, Integer totalDays) {
+        TourEntity tourUpdate = tourRepository.findById(tourId).orElseThrow();
+        HotelEntity hotel = hotelRepository.findById(hotelId).orElseThrow();
+
+        ReservationEntity reservation = tourHelper.createReservation(hotel, tourUpdate.getCustomer(),totalDays);
+        tourUpdate.addReservation(reservation);
+        tourRepository.save(tourUpdate);
+        
+        return reservation.getId();
     }
 
 }

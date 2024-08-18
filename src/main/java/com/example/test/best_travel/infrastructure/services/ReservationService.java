@@ -19,6 +19,7 @@ import com.example.test.best_travel.domain.repositories.CustomerRepository;
 import com.example.test.best_travel.domain.repositories.HotelRepository;
 import com.example.test.best_travel.domain.repositories.ReservationRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IReservationService;
+import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class ReservationService implements IReservationService {
     private final HotelRepository hotelRepository;
     private final CustomerRepository customerRepository;
     private final ReservationRepository reservationRepository;
+    private final CustomerHelper customerHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -51,7 +53,9 @@ public class ReservationService implements IReservationService {
         
         ReservationEntity reservationPersisted = reservationRepository.save(reservationToPersist);    
         log.info("Reservation saved with id: {}",reservationPersisted.getId());   
-
+        
+        // Increment Count
+        customerHelper.increase(customer.getDni(), ReservationService.class);
         return entityToResponse(reservationPersisted);
     }
 
