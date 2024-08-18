@@ -78,7 +78,6 @@ public class TourService implements ITourService {
                 .build();
     }
 
-    @Transactional
     @Override
     public void delete(Long id) {;
         TourEntity tourToDelete = tourRepository.findById(id).orElseThrow();
@@ -86,27 +85,34 @@ public class TourService implements ITourService {
     }
 
     @Override
-    public void deleteTicket(UUID ticketId, Long tourId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteTicket'");
+    public void removeTicket(Long tourId,UUID ticketId) {
+        TourEntity tourUpdate = tourRepository.findById(tourId).orElseThrow();
+        tourUpdate.removeTicket(ticketId);
+        tourRepository.save(tourUpdate);
     }
 
     @Override
     public UUID addTicket(Long flyId, Long tourId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addTicket'");
+        TourEntity tourUpdate = tourRepository.findById(tourId).orElseThrow();
+        FlyEntity fly = flyRepository.findById(flyId).orElseThrow();
+        TicketEntity ticket = tourHelper.createTicket(fly, tourUpdate.getCustomer());
+        tourUpdate.addTicket(ticket);
+        tourRepository.save(tourUpdate);
+        
+        return ticket.getId();
     }
 
-    @Override
-    public void removeReservation(UUID reservationId, Long tourId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeReservation'");
-    }
 
     @Override
     public UUID addReservation(Long reservationId, Long tourId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addReservation'");
+    }
+
+    @Override
+    public void removeReservation(Long tourId,UUID reservationId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeReservation'");
     }
 
 }

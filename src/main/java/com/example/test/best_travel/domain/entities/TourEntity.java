@@ -55,12 +55,14 @@ public class TourEntity {
     @JoinColumn(name = "id_customer")
     private CustomerEntity customer;
 
+
     @PrePersist
     @PreRemove
     public void updateFk() {
         this.tickets.forEach(ticket -> ticket.setTour(this));
         this.reservations.forEach(reservation -> reservation.setTour(this));
     }
+    
 
     public void removeTicket(UUID id) {
         this.tickets.forEach(ticket -> {
