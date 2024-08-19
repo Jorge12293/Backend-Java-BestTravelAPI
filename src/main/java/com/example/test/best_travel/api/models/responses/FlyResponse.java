@@ -2,7 +2,7 @@ package com.example.test.best_travel.api.models.responses;
 
 import java.math.BigDecimal;
 
-import com.example.test.best_travel.util.AeroLine;
+import com.example.test.best_travel.util.enums.AeroLine;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.best_travel.domain.entities.CustomerEntity;
 import com.example.test.best_travel.domain.repositories.CustomerRepository;
+import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +17,7 @@ public class CustomerHelper {
     private final CustomerRepository customerRepository;
 
     public void increase(String customerId, Class<?> type) {
-        CustomerEntity customerToUpdate = customerRepository.findById(customerId).orElseThrow();
+        CustomerEntity customerToUpdate = customerRepository.findById(customerId).orElseThrow(()-> new IdNotFoundException("Customer"));
         switch (type.getSimpleName()) {
             case "TourService" -> customerToUpdate.setTotalTours(customerToUpdate.getTotalTours() + 1);
             case "TicketService" -> customerToUpdate.setTotalFlights(customerToUpdate.getTotalFlights() + 1);

@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.springframework.data.domain.Page;
 
-import com.example.test.best_travel.util.SortType;
+import com.example.test.best_travel.util.enums.SortType;
 
 public interface CatalogService<R> {
  

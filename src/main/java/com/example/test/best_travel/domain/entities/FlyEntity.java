@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
-import com.example.test.best_travel.util.AeroLine;
+import com.example.test.best_travel.util.enums.AeroLine;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

@@ -15,7 +15,7 @@ import com.example.test.best_travel.api.models.responses.FlyResponse;
 import com.example.test.best_travel.domain.entities.FlyEntity;
 import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
-import com.example.test.best_travel.util.SortType;
+import com.example.test.best_travel.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

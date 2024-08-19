@@ -19,7 +19,10 @@ import com.example.test.best_travel.domain.repositories.CustomerRepository;
 import com.example.test.best_travel.domain.repositories.HotelRepository;
 import com.example.test.best_travel.domain.repositories.ReservationRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IReservationService;
+import com.example.test.best_travel.infrastructure.helpers.BlackListHelper;
 import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
+import com.example.test.best_travel.util.enums.Tables;
+import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,11 +37,14 @@ public class ReservationService implements IReservationService {
     private final CustomerRepository customerRepository;
     private final ReservationRepository reservationRepository;
     private final CustomerHelper customerHelper;
+    private final BlackListHelper blackListHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
-        HotelEntity hotel = hotelRepository.findById(request.getIdHotel()).orElseThrow();
-        CustomerEntity customer = customerRepository.findById(request.getIdClient()).orElseThrow();
+        blackListHelper.isInBlackListCustomer(request.getIdClient());        
+
+        HotelEntity hotel = hotelRepository.findById(request.getIdHotel()).orElseThrow(()-> new IdNotFoundException(Tables.hotel.name()));
+        CustomerEntity customer = customerRepository.findById(request.getIdClient()).orElseThrow(()-> new IdNotFoundException(Tables.customer.name()));
 
         ReservationEntity reservationToPersist = ReservationEntity.builder()
             .id(UUID.randomUUID())
@@ -61,14 +67,14 @@ public class ReservationService implements IReservationService {
 
     @Override
     public ReservationResponse read(UUID id) {
-        ReservationEntity reservationFromDB = reservationRepository.findById(id).orElseThrow();
+        ReservationEntity reservationFromDB = reservationRepository.findById(id).orElseThrow(()-> new IdNotFoundException(Tables.reservation.name()));
         return entityToResponse(reservationFromDB);
     }
 
     @Override
     public ReservationResponse update(ReservationRequest request, UUID id) {
-        HotelEntity hotel = hotelRepository.findById(request.getIdHotel()).orElseThrow();
-        ReservationEntity reservationToUpdate = reservationRepository.findById(id).orElseThrow();
+        HotelEntity hotel = hotelRepository.findById(request.getIdHotel()).orElseThrow(()-> new IdNotFoundException(Tables.hotel.name()));
+        ReservationEntity reservationToUpdate = reservationRepository.findById(id).orElseThrow(()-> new IdNotFoundException(Tables.reservation.name()));
 
         reservationToUpdate.setHotel(hotel);
         reservationToUpdate.setTotalDays(request.getTotalDays());
@@ -85,13 +91,13 @@ public class ReservationService implements IReservationService {
 
     @Override
     public void delete(UUID id) {
-        ReservationEntity reservationToDelete = reservationRepository.findById(id).orElseThrow();
+        ReservationEntity reservationToDelete = reservationRepository.findById(id).orElseThrow(()-> new IdNotFoundException(Tables.reservation.name()));
         reservationRepository.delete(reservationToDelete);
     }
     
     @Override
     public BigDecimal findPrice(Long hotelId) {
-        HotelEntity hotel = hotelRepository.findById(hotelId).orElseThrow();
+        HotelEntity hotel = hotelRepository.findById(hotelId).orElseThrow(()-> new IdNotFoundException(Tables.hotel.name()));
         return hotel.getPrice().add(hotel.getPrice().multiply(charges_price_percentage));
     }
 

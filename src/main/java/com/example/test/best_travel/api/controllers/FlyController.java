@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.test.best_travel.api.models.responses.FlyResponse;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
-import com.example.test.best_travel.util.SortType;
+import com.example.test.best_travel.util.enums.SortType;
 
 import lombok.AllArgsConstructor;
 
