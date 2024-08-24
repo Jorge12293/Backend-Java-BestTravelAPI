@@ -1,17 +1,17 @@
-#URL SWAGGER LOCAL
-http://localhost:8080/best_travel/swagger-ui/index.html
+# Best Travel API
 
+This project is a REST API developed with Spring Boot to manage and optimize services related to tourism and travel.
 
+## Swagger Documentation
 
+To explore and test the various endpoints available in the API, you can access the Swagger interface on your local environment via the following link:
 
+[Swagger UI - Localhost](http://localhost:8080/best_travel/swagger-ui/index.html)
 
-https://api.apilayer.com/exchangerates_data/latest?symbols=MXN&base=USD
+## Integration with External Currency Conversion API
 
+The API includes an implementation for currency conversion using the free service provided by [apilayer](https://apilayer.com). This service allows you to perform currency conversions easily and efficiently.
 
-https://apilayer.com/marketplace/exchangerates_data-api?utm_source=apilayermarketplace&utm_medium=featured
+For more information about the free plan and how it is implemented in this project, visit the following link:
 
-
-
-
-// Implementacion de Api Free para la conversion de Moneda
-https://apilayer.com/marketplace/order_complete/exchangerates_data/free-plan/597?txn=free
+[apilayer - Free Plan](https://apilayer.com/marketplace/order_complete/exchangerates_data/free-plan/597?txn=free)
