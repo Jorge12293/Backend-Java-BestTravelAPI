@@ -7,6 +7,7 @@ import com.example.test.best_travel.api.models.responses.FlyResponse;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
 import com.example.test.best_travel.util.enums.SortType;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping(path = "fly")
 @AllArgsConstructor
+@Tag(name = "Fly")
 public class FlyController {
     
     private final IFlyService flyService;
