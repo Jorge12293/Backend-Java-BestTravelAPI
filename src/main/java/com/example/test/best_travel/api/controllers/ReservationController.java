@@ -18,7 +18,9 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Currency;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 @RestController
@@ -62,14 +65,19 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.update(request, id));
     }
 
+    @Operation(summary = "Delete a reservation with of passed.")
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id){
         reservationService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Return a reservation price given a hotel Id.")
     @GetMapping
-    public ResponseEntity<Map<String,BigDecimal>> getReservationPrice(@RequestParam Long reservationId) {
-        return ResponseEntity.ok(Collections.singletonMap("ticketPrice", reservationService.findPrice(reservationId)));
+    public ResponseEntity<Map<String,BigDecimal>> getReservationPrice(
+        @RequestParam Long hotelId,
+        @RequestHeader(required = false) Currency currency) {
+        if(Objects.isNull(currency)) currency = Currency.getInstance("USD");    
+        return ResponseEntity.ok(Collections.singletonMap("ticketPrice", reservationService.findPrice(hotelId,currency)));
     }
 }
