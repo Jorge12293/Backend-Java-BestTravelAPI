@@ -5,13 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
+//import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.test.best_travel.api.models.responses.FlyResponse;
 import com.example.test.best_travel.domain.entities.FlyEntity;
@@ -19,22 +19,25 @@ import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
 import com.example.test.best_travel.util.enums.SortType;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Transactional
 @Service
+@AllArgsConstructor
 @Slf4j
 public class FlyService implements IFlyService {
 
     private final FlyRepository flyRepository;
 
+    /*
     private final WebClient webClient;
 
     public FlyService(FlyRepository flyRepository,@Qualifier(value = "base") WebClient webClient) {
         this.flyRepository = flyRepository;
         this.webClient = webClient;
     }
-
+   */
     @Override
     public Page<FlyResponse> readAll(Integer page, Integer size, SortType sortType) {
         PageRequest pageRequest = null;
