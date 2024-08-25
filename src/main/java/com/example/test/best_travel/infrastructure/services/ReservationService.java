@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
@@ -24,6 +25,7 @@ import com.example.test.best_travel.infrastructure.dtos.CurrencyDTO;
 import com.example.test.best_travel.infrastructure.helpers.ApiCurrencyConnectorHelper;
 import com.example.test.best_travel.infrastructure.helpers.BlackListHelper;
 import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
+import com.example.test.best_travel.infrastructure.helpers.EmailHelper;
 import com.example.test.best_travel.util.enums.Tables;
 import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 
@@ -42,6 +44,7 @@ public class ReservationService implements IReservationService {
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
     private final ApiCurrencyConnectorHelper currencyConnectorHelper;
+    private final EmailHelper emailHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -64,6 +67,8 @@ public class ReservationService implements IReservationService {
         ReservationEntity reservationPersisted = reservationRepository.save(reservationToPersist);    
         log.info("Reservation saved with id: {}",reservationPersisted.getId());   
         
+        if(Objects.nonNull(request.getEmail())) emailHelper.sendMail(request.getEmail(), customer.getFullName(), Tables.reservation.name());
+
         // Increment Count
         customerHelper.increase(customer.getDni(), ReservationService.class);
         return entityToResponse(reservationPersisted);

@@ -2,6 +2,7 @@ package com.example.test.best_travel.infrastructure.services;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,9 @@ import com.example.test.best_travel.domain.repositories.TourRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.ITourService;
 import com.example.test.best_travel.infrastructure.helpers.BlackListHelper;
 import com.example.test.best_travel.infrastructure.helpers.CustomerHelper;
+import com.example.test.best_travel.infrastructure.helpers.EmailHelper;
 import com.example.test.best_travel.infrastructure.helpers.TourHelper;
+import com.example.test.best_travel.util.enums.Tables;
 import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +45,8 @@ public class TourService implements ITourService {
     private final TourHelper tourHelper;
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
-
+    private final EmailHelper emailHelper;
+    
     @Override
     public TourResponse create(TourRequest request) {
         blackListHelper.isInBlackListCustomer(request.getCustomerId());
@@ -67,6 +71,9 @@ public class TourService implements ITourService {
 
         // Increment Count
         customerHelper.increase(customer.getDni(), TourService.class);
+
+        if(Objects.nonNull(request.getEmail())) emailHelper.sendMail(request.getEmail(), customer.getFullName(), Tables.tour.name());
+
 
         return TourResponse.builder()
                 .reservationIds(
