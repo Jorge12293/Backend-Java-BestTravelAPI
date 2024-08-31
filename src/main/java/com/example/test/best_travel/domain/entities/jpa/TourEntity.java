@@ -1,4 +1,4 @@
-package com.example.test.best_travel.domain.entities;
+package com.example.test.best_travel.domain.entities.jpa;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -1,11 +1,11 @@
 package com.example.test.best_travel.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.Redisson;
+/* import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.spring.cache.CacheConfig;
-import org.redisson.spring.cache.RedissonSpringCacheManager;
+import org.redisson.spring.cache.RedissonSpringCacheManager; */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -22,11 +22,11 @@ import com.example.test.best_travel.util.constants.CacheConstants;
 import java.util.Map;
 
 @Configuration
-@EnableCaching
-@EnableScheduling
-@Slf4j
+//@EnableCaching
+//@EnableScheduling
+//@Slf4j
 public class RedisConfig {
-    
+    /*
     @Value(value = "${cache.redis.address}")
     private String serverAddress;
     @Value(value = "${cache.redis.password}")
@@ -57,4 +57,5 @@ public class RedisConfig {
     public void deleteCache() {
         log.info("Clean cache");
     }
+    */
 }

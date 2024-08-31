@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.best_travel.api.models.request.TourRequest;
 import com.example.test.best_travel.api.models.responses.TourResponse;
-import com.example.test.best_travel.domain.entities.CustomerEntity;
-import com.example.test.best_travel.domain.entities.FlyEntity;
-import com.example.test.best_travel.domain.entities.HotelEntity;
-import com.example.test.best_travel.domain.entities.ReservationEntity;
-import com.example.test.best_travel.domain.entities.TicketEntity;
-import com.example.test.best_travel.domain.entities.TourEntity;
+import com.example.test.best_travel.domain.entities.jpa.CustomerEntity;
+import com.example.test.best_travel.domain.entities.jpa.FlyEntity;
+import com.example.test.best_travel.domain.entities.jpa.HotelEntity;
+import com.example.test.best_travel.domain.entities.jpa.ReservationEntity;
+import com.example.test.best_travel.domain.entities.jpa.TicketEntity;
+import com.example.test.best_travel.domain.entities.jpa.TourEntity;
 import com.example.test.best_travel.domain.repositories.CustomerRepository;
 import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.domain.repositories.HotelRepository;

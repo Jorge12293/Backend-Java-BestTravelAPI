@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.test.best_travel.api.models.responses.FlyResponse;
-import com.example.test.best_travel.domain.entities.FlyEntity;
+import com.example.test.best_travel.domain.entities.jpa.FlyEntity;
 import com.example.test.best_travel.domain.repositories.FlyRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
 import com.example.test.best_travel.util.enums.SortType;

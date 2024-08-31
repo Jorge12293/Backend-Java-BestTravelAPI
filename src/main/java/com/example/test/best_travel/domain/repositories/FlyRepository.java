@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.example.test.best_travel.domain.entities.FlyEntity;
+import com.example.test.best_travel.domain.entities.jpa.FlyEntity;
 
 public interface FlyRepository extends JpaRepository<FlyEntity,Long>{
 

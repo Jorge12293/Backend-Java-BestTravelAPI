@@ -3,7 +3,7 @@ package com.example.test.best_travel.infrastructure.helpers;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.test.best_travel.domain.entities.CustomerEntity;
+import com.example.test.best_travel.domain.entities.jpa.CustomerEntity;
 import com.example.test.best_travel.domain.repositories.CustomerRepository;
 import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 

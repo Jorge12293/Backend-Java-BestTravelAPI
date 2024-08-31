@@ -2,7 +2,8 @@ package com.example.test.best_travel.domain.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.test.best_travel.domain.entities.HotelEntity;
+import com.example.test.best_travel.domain.entities.jpa.HotelEntity;
+
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
