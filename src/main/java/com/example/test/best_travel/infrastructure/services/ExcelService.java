@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.example.test.best_travel.domain.entities.jpa.CustomerEntity;
-import com.example.test.best_travel.domain.repositories.CustomerRepository;
+import com.example.test.best_travel.domain.repositories.jpa.CustomerRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.ReportService;
 
 import lombok.AllArgsConstructor;

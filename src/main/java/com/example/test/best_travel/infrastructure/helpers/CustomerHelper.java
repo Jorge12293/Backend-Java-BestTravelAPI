@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.best_travel.domain.entities.jpa.CustomerEntity;
-import com.example.test.best_travel.domain.repositories.CustomerRepository;
+import com.example.test.best_travel.domain.repositories.jpa.CustomerRepository;
 import com.example.test.best_travel.util.exceptions.IdNotFoundException;
 
 import lombok.AllArgsConstructor;

@@ -1,25 +1,25 @@
 package com.example.test.best_travel.config;
+import org.springframework.context.annotation.Configuration;
 
-import lombok.extern.slf4j.Slf4j;
-/* import org.redisson.Redisson;
+/* import lombok.extern.slf4j.Slf4j;
+import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.spring.cache.CacheConfig;
-import org.redisson.spring.cache.RedissonSpringCacheManager; */
+import org.redisson.spring.cache.RedissonSpringCacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.test.best_travel.util.constants.CacheConstants;
 
-import java.util.Map;
+import java.util.Map; */
 
 @Configuration
 //@EnableCaching

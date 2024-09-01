@@ -1,4 +1,4 @@
-package com.example.test.best_travel.domain.repositories;
+package com.example.test.best_travel.domain.repositories.jpa;
 
 import java.math.BigDecimal;
 import java.util.Set;

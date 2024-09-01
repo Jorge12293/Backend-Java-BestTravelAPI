@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
 //import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.test.best_travel.api.models.responses.FlyResponse;
 import com.example.test.best_travel.domain.entities.jpa.FlyEntity;
-import com.example.test.best_travel.domain.repositories.FlyRepository;
+import com.example.test.best_travel.domain.repositories.jpa.FlyRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IFlyService;
 import com.example.test.best_travel.util.enums.SortType;
 

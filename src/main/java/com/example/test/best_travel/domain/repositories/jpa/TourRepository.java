@@ -1,4 +1,4 @@
-package com.example.test.best_travel.domain.repositories;
+package com.example.test.best_travel.domain.repositories.jpa;
 
 import org.springframework.data.repository.CrudRepository;
 

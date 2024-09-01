@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.best_travel.api.models.responses.HotelResponse;
 import com.example.test.best_travel.domain.entities.jpa.HotelEntity;
-import com.example.test.best_travel.domain.repositories.HotelRepository;
+import com.example.test.best_travel.domain.repositories.jpa.HotelRepository;
 import com.example.test.best_travel.infrastructure.abstract_services.IHotelService;
 //import com.example.test.best_travel.util.constants.CacheConstants;
 import com.example.test.best_travel.util.enums.SortType;
