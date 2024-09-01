@@ -85,9 +85,9 @@ public class SecurityConfig {
         http
             .formLogin(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(getPublicMatchers()).permitAll()
-                .requestMatchers(getUserMatchers()).authenticated()
-                .requestMatchers(getAdminMatchers()).hasAuthority(ROLE_ADMIN)
+                .requestMatchers(convertToAntPathMatchers(PUBLIC_RESOURCES)).permitAll()
+                .requestMatchers(convertToAntPathMatchers(USER_RESOURCES)).authenticated()
+                .requestMatchers(convertToAntPathMatchers(ADMIN_RESOURCES)).hasAuthority(ROLE_ADMIN)
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
     
@@ -156,8 +156,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter(
-            JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter) {
+    public JwtAuthenticationConverter jwtAuthenticationConverter(JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter) {
         var converter = new JwtAuthenticationConverter();
         converter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return converter;
@@ -195,18 +194,6 @@ public class SecurityConfig {
         return new RSAKey.Builder(publicKey).privateKey(privateKey).keyID(UUID.randomUUID().toString()).build();
     }
 
-    private AntPathRequestMatcher[] getPublicMatchers() {
-        return convertToAntPathMatchers(PUBLIC_RESOURCES);
-    }
-    
-    private AntPathRequestMatcher[] getUserMatchers() {
-        return convertToAntPathMatchers(USER_RESOURCES);
-    }
-    
-    private AntPathRequestMatcher[] getAdminMatchers() {
-        return convertToAntPathMatchers(ADMIN_RESOURCES);
-    }
-
     private AntPathRequestMatcher[] convertToAntPathMatchers(String[] paths) {
         return Arrays.stream(paths)
                      .map(AntPathRequestMatcher::new)
@@ -219,5 +206,5 @@ public class SecurityConfig {
     private static final String[] ADMIN_RESOURCES = { "/users/**" };
     private static final String LOGIN_RESOURCE = "/login";
     private static final String ROLE_ADMIN = "write";
-    private static final String APPLICATION_OWNER = "test app";
+    private static final String APPLICATION_OWNER = "Best Travel App";
 }
